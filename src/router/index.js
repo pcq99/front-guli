@@ -54,7 +54,28 @@ export const constantRoutes = [
       meta: { title: 'Dashboard', icon: 'dashboard' }
     }]
   },
-
+  //讲师模块
+  {
+    path: '/teacher',
+    component: Layout,
+    redirect: '/teacher/list',
+    name: '讲师管理',
+    meta: { title: '讲师管理', icon: 'el-icon-s-help' },
+    children: [
+      {
+        path: 'list',
+        name: 'list',
+        component: () => import('@/views/edu/teacher/list'),
+        meta: { title: '讲师列表', icon: 'table' }
+      },
+      {
+        path: 'save',
+        name: 'save',
+        component: () => import('@/views/edu/teacher/save'),
+        meta: { title: '讲师添加', icon: 'tree' }
+      }
+    ]
+  },
   {
     path: '/example',
     component: Layout,
