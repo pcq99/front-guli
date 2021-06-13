@@ -67,7 +67,7 @@
 
       <el-table-column label="操作" width="200" align="center">
         <template slot-scope="scope">
-          <router-link :to="'/edu/teacher/edit/' + scope.row.id">
+          <router-link :to="'/teacher/edit/' + scope.row.id">
             <el-button
               type="primary"
               size="mini"
@@ -95,7 +95,7 @@
   </div>
 </template>
 <script>
-import teacher from '@/api/teacher/teacher'
+import teacher from '@/api/edu/teacher'
 
 export default {
   data() {
@@ -120,7 +120,6 @@ export default {
           this.list = res.data.rows
           this.total = res.data.total
         })
-        .catch(console.log('error'))
     },
     // 清空查询条件
     resetData() {

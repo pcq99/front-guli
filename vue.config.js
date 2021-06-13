@@ -59,7 +59,7 @@ module.exports = {
         include: 'initial'
       }
     ])
-
+    config.resolve.alias.set('static', resolve('public/static'))
     // when there are many pages, it will cause too many meaningless requests
     config.plugins.delete('prefetch')
 
