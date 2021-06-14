@@ -125,7 +125,8 @@ export default {
         description: '',
         cover:
           'https://guli-pengchuqing.oss-cn-hangzhou.aliyuncs.com/2021/03/20054330e0f149426c8ebc1100338a8176file.png',
-        price: 0
+        price: 0,
+        courseId: ''
       },
       BASE_API: process.env.VUE_APP_BASE_API,
       teacherList: [],
@@ -136,11 +137,28 @@ export default {
     }
   },
   created() {
-    this.getTeacherList()
-    this.getOneSubject()
+    if (this.$route.params && this.$route.params.id) {
+      // 修改页面
+      this.courseId = this.$route.params.id
+      this.getCourseInfo()
+    } else {
+      // 添加页面
+      this.getTeacherList()
+      this.getOneSubject()
+    }
   },
 
   methods: {
+    // 根据课程id查询课程信息
+    getCourseInfo() {
+      course.getCourseInfoId(this.courseId).then(res => {
+        this.courseInfo = res.data.courseInfoVo
+        // 1. 查询所有的课程分类，包括一级分类和二级分类
+        subject.getSubjectList().then(res => {
+
+        })
+      })
+    },
     // 图片上传成功后事件
     handleAvatarSuccess(res, file) {
       this.courseInfo.cover = res.data.url

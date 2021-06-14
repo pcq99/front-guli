@@ -14,5 +14,20 @@ export default {
       url: '/eduservice/edu-teacher/findAll',
       method: 'get'
     })
+  },
+  // 根据课程id查询课程信息
+  getCourseInfoId(id) {
+    return request({
+      url: `/eduservice/edu-course/getCourseInfo/${id}`,
+      method: 'get'
+    })
+  },
+  // 修改课程信息
+  updateCourseInfoId(courseInfo) {
+    return request({
+      url: '/eduservice/edu-coursefindAll/updateCourseInfo',
+      method: 'post',
+      data: courseInfo
+    })
   }
 }
