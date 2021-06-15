@@ -25,7 +25,7 @@ export default {
   // 修改课程信息
   updateCourseInfoId(courseInfo) {
     return request({
-      url: '/eduservice/edu-coursefindAll/updateCourseInfo',
+      url: '/eduservice/edu-course/updateCourseInfo',
       method: 'post',
       data: courseInfo
     })

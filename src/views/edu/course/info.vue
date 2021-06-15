@@ -100,7 +100,7 @@
         <el-button
           :disabled="saveBtnDisabled"
           type="primary"
-          @click="next"
+          @click="saveOrUpdate"
         >保存并下一步</el-button>
       </el-form-item>
     </el-form>
@@ -155,8 +155,17 @@ export default {
         this.courseInfo = res.data.courseInfoVo
         // 1. 查询所有的课程分类，包括一级分类和二级分类
         subject.getSubjectList().then(res => {
-
+          this.subjectOneList = res.data.list
+          // 2. 遍历所有一级分类
+          for (let i = 0; i < this.subjectOneList.length; i++) {
+            const oneSubject = this.subjectOneList[i]
+            // 3. 比较当前courseInfo里面的一级分类和所有的一级分类id
+            if (this.courseInfo.subjectParentId === oneSubject.id) {
+              this.subjectTwoList = oneSubject.children
+            }
+          }
         })
+        this.getTeacherList()
       })
     },
     // 图片上传成功后事件
@@ -198,8 +207,8 @@ export default {
         this.teacherList = res.data.items
       })
     },
-    // 保存并下一步
-    next() {
+    // 添加课程
+    addCourse() {
       course.getSubjectList(this.courseInfo).then((res) => {
         this.$message({
           type: 'success',
@@ -207,6 +216,25 @@ export default {
         })
         this.$router.push({ path: '/course/chapter/' + res.data.courseId })
       })
+    },
+    updateCourse() {
+      course.updateCourseInfoId(this.courseInfo).then((res) => {
+        this.$message({
+          type: 'success',
+          message: '修改课程信息成功'
+        })
+        this.$router.push({ path: '/course/chapter/' + this.courseId })
+      })
+    },
+    // 添加或者修改
+    saveOrUpdate() {
+      if (!this.courseInfo.id) {
+        // 添加
+        this.addCourse()
+      } else {
+        // 修改
+        this.updateCourse()
+      }
     }
   }
 }
