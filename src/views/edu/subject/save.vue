@@ -47,7 +47,9 @@ export default {
       loading: false
     }
   },
-  created() {},
+  created() {
+    console.log(this.BASE_API,'能获取到么')
+  },
   methods: {
     // 点击按钮上传文件到接口里面
     submitUpload() {
