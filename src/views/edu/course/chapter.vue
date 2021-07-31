@@ -157,6 +157,7 @@ export default {
       },
       fileList: [],//上传文件列表
       // BASE_API: process.env.BASE_API // 接口API地址
+      // process.env.BASE_API用不了，暂时先这样试一下
       BASE_API: 'http://localhost:9001'
     };
   },
